@@ -1,9 +1,9 @@
 # filmoteca-v2
 
 
-Se trata de una ampliación del proyecto: [https://github.com/soniaArenas/filmoteca](https://github.com/soniaArenas/filmoteca)
+Se trata de una **ampliación** del proyecto: [https://github.com/soniaArenas/filmoteca](https://github.com/soniaArenas/filmoteca)
 
-He incluido ciertas apliaciones y mejoras de las cuales ya hablé en el archivo readme.md del proyecto. 
+He incluido ciertas ampliaciones y mejoras de las cuales ya hablé en el archivo readme.md del proyecto. 
 
 Se puede visitar la web ya implementada en: 
 [http://soniapuente.com/nuevaFilmoteca/](http://soniapuente.com/nuevaFilmoteca/)
@@ -16,6 +16,8 @@ En cuanto a los controladores que manejaban la información que se debía de obt
 
 En cuanto a funcionalidad:
 
-Cuando se inserta una película, automáticamente la web busca en google el link de Imdb de la película insertada. 
-Accede al link y obtiene los datos que le hemos solicitado para guardarlos en la base de datos.
-Al clickar en una de las películas que aparecen en la lista, se abre un div creado dinámicamente, con toda la información que deseamos mostrar y que hemos obtenido mediante web scraping.
+Cuando se inserta una película, automáticamente la web **busca en google** el link de Imdb de la película insertada. 
+**Accede al link y obtiene** los datos que le hemos solicitado para guardarlos en la base de datos.
+**Al clickar** en una de las películas que aparecen en la lista, se abre un **div creado dinámicamente**, con toda la información que deseamos mostrar y que hemos obtenido mediante web scraping.
+
+También he implementado un **sistema de votación** de las películas, que guarda en una tabla todas las puntuaciones que recibe cada película, obtiene la media y la inserta en el campo correspondiente a la película con el resto de datos que hemos ido obteniendo.
