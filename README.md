@@ -13,7 +13,9 @@ Se puede visitar la web ya implementada en:
 # Mejoras
 
 En cuanto a los controladores que manejaban la información que se debía de obtener o insertar en la base de datos, los he colocado en un mismo archivo, a la consulta de Ajax le paso otro parámetro para que el controlador sepa la acción que tiene que ejecutar y a que modelo llamar.
+
 En cuanto a funcionalidad:
+
 Cuando se inserta una película, automáticamente la web busca en google el link de Imdb de la película insertada. 
 Accede al link y obtiene los datos que le hemos solicitado para guardarlos en la base de datos.
 Al clickar en una de las películas que aparecen en la lista, se abre un div creado dinámicamente, con toda la información que deseamos mostrar y que hemos obtenido mediante web scraping.
