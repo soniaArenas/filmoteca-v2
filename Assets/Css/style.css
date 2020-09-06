@@ -1,0 +1,132 @@
+
+*{	
+	font-family: 'Merienda';
+}
+body{
+	background-image: url("../Img/fondoFilm.jpg");
+	background-color: #cccccc; 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	overflow: scroll;
+	overflow-x: hidden;
+font-family: 'Merienda';
+
+}
+
+#title{
+	background-color: #E0A755; 
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	height: 100%;
+	width: 80%;
+	border-radius: 20px;
+	margin: 0 auto;
+	
+}
+
+#content{
+	
+	max-width: 80%;
+	margin: 0 auto;
+	border-radius: 20px;
+}
+table{
+	width: 60%;
+}
+#searchDiv{
+	margin: 0% auto;
+	text-align: center;
+	
+
+}
+
+.btn{
+	background-color:#E0A755;
+	color:black;
+	font-weight: bold;
+	border-radius: 5px;
+
+
+}
+
+
+
+#addFilmDiv{
+
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	
+}
+
+.headTable{
+	background-color: #BF7D2C;
+	font-weight: bold;
+	text-align: center; 
+}
+#result{
+	display: flex;
+	justify-content: center;
+}
+td{
+	padding:2%;
+	margin:10%;
+	
+}
+#result{
+	display: flex;
+	justify-content: center;
+}
+
+.clsEven{
+	background-color:#CC9945;
+}
+.clsOdd{
+	background-color:#BF7D2C;
+}
+
+.film:hover{
+    color:blue !important;
+} 
+#newDiv{
+
+	padding: 2%;
+	width: 80%;
+	background-color:#BF7D2C;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	z-index: 100;
+border-radius: 20px;
+ border: 5px solid black;
+}
+
+#closeImg{
+	width: 5%;
+	float:right;
+}
+.titleH{
+	text-align: center;
+	font-weight: bold;
+}
+ 
+.ribet{
+	width: 15%;
+	height: auto;
+
+}
+ul{
+	list-style-type: none;
+}
+li{
+	float: left;
+}
+#divDesc{
+	float: right;
+}
