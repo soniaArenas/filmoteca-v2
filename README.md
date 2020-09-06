@@ -5,6 +5,11 @@ Se trata de una ampliación del proyecto: [https://github.com/soniaArenas/filmot
 
 He incluido ciertas apliaciones y mejoras de las cuales ya hablé en el archivo readme.md del proyecto. 
 
+Se puede visitar la web ya implementada en: 
+[http://soniapuente.com/nuevaFilmoteca/](http://soniapuente.com/nuevaFilmoteca/)
+
+
+
 # Mejoras
 
 En cuanto a los controladores que manejaban la información que se debía de obtener o insertar en la base de datos, los he colocado en un mismo archivo, a la consulta de Ajax le paso otro parámetro para que el controlador sepa la acción que tiene que ejecutar y a que modelo llamar.
