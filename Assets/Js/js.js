@@ -20,13 +20,13 @@
 
 
   $("#setFilm").click(function() { 
-
+   var year2 = $('#year').val();
    var nameReal = $('#name').val();
    var name2 = nameReal.toLowerCase();
    var nameForSearch = name2.split(" ").join("+"); 
-   nameForSearch = nameForSearch+"+imdb";
+   nameForSearch = nameForSearch+year2+"+imdb";
 
-   var year2 = $('#year').val();
+
 
    $.ajax({
     type: "POST",
