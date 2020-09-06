@@ -10,8 +10,9 @@ if (isset($_POST["getFilms"])) {
 	echo " <table class='principalTable'><thead>
 	<tr class='headTable'>
 	<td>Título</td>
-	<td>Año</td>
+	<td>Año estreno</td>
 	<td>Imdb Nota</td>
+	<td>Visitantes Nota</td>
 	</tr></thead><tbody> ";
 
 	$numRow=0;
@@ -28,7 +29,7 @@ if (isset($_POST["getFilms"])) {
 			$clsRow="clsOdd";
 		}
 
-		echo "<tr class=".$clsRow."><td class='film' id='film".$reg[0]."'>".ucfirst($reg[1])."</td><td>".ucfirst($reg[2])."</td><td>".ucfirst($reg[3])."</td></tr>";
+		echo "<tr class=".$clsRow."><td class='film' id='film".$reg[0]."'>".ucfirst($reg[1])."</td><td>".ucfirst($reg[2])."</td><td>".ucfirst($reg[3])."</td><td>".ucfirst($reg[4])."</td></tr>";
 
 		$numRow++;
 	}
@@ -72,7 +73,7 @@ if (isset($_POST["getFilms"])) {
 
 
 
-		echo "<tr class=".$clsRow."><td class='film' id='film".$reg[0]."'>".ucfirst($reg[1])."</td><td>".ucfirst($reg[2])."</td><td>".ucfirst($reg[3])."</td></tr>";
+		echo "<tr class=".$clsRow."><td class='film' id='film".$reg[0]."'>".ucfirst($reg[1])."</td><td>".ucfirst($reg[2])."</td><td>".ucfirst($reg[3])."</td><td>".ucfirst($reg[4])."</td></tr>";
 		$numRow++;
 	}
 	echo "</table>";
@@ -94,6 +95,7 @@ if (isset($_POST["getFilms"])) {
 		<td><img src='".ucfirst($reg[5])."' alt=''></td>
 		<td> 
 		<h4 class='noteH'>Nota Imbd: ".ucfirst($reg[3])."</h4>
+		<h4 class='noteH'>Nota nuestros visitantes: ".ucfirst($reg[11])."</h4>
 		<h4 class='descri'>Descripción</h4>
 		<p>".ucfirst($reg[6])."</p>
 		<h4>Director</h4>
@@ -109,7 +111,11 @@ if (isset($_POST["getFilms"])) {
 		<p>".ucfirst($reg[10])."</p>
 		</td>
 		</table>
-
+<div>
+  <h4>Valorar Película</h4>
+  <input id='score".$id."' class='inputScore' type='text' placeholder='nota de 1 a 10...'>
+  <button class='btn' id='btnScore'>Valorar</button>
+</div>
 
 
 		</div>";
@@ -130,5 +136,11 @@ if (isset($_POST["getFilms"])) {
 
 	include("../Models/updateModel.php");
 
+}else if (isset($_POST["voteFilm"])) { 
+	$id=$_POST['id'];
+	$score=$_POST['scoreFilm'];
+	include("../Models/voteModel.php");
+
 }
+
 ?>

@@ -1,223 +1,246 @@
   $(document).ready(function() { 
 
-    loadFilms("name","asc");
+  loadFilms("name","asc");
 
-    $('#addFilmDiv').hide();
-
-
-    $("#addBtn").click(function() { 
-
-      if ($('#addFilmDiv').is(':visible')) {
+  $('#addFilmDiv').hide();
 
 
-       $('#addFilmDiv').hide();
-       $('#name, #year').val('');
+  $("#addBtn").click(function() { 
 
-     } else {
-       $('#addFilmDiv').show();
-     }
-   }); 
+    if ($('#addFilmDiv').is(':visible')) {
 
 
-    $("#setFilm").click(function() { 
-     var year2 = $('#year').val();
-     var nameReal = $('#name').val();
-     var name2 = nameReal.toLowerCase();
-     var nameForSearch = name2.split(" ").join("+"); 
-     nameForSearch = nameForSearch+year2+"+imdb";
+     $('#addFilmDiv').hide();
+     $('#name, #year').val('');
+
+   } else {
+     $('#addFilmDiv').show();
+   }
+ }); 
+
+
+  $("#setFilm").click(function() { 
+   var year2 = $('#year').val();
+   var nameReal = $('#name').val();
+   var name2 = nameReal.toLowerCase();
+   var nameForSearch = name2.split(" ").join("+"); 
+   nameForSearch = nameForSearch+year2+"+imdb";
+
+   $.ajax({
+    type: "POST",
+    url: "Controllers/googleSearch.php",
+    data: { str:nameForSearch },
+    success: function(linkImdb){
 
      $.ajax({
       type: "POST",
-      url: "Controllers/googleSearch.php",
-      data: { str:nameForSearch },
-      success: function(linkImdb){
+      url: "Controllers/queryImdb.php",
+      data: { linkImdb: linkImdb },
+      success: function(noteImdb){
 
-       $.ajax({
-        type: "POST",
-        url: "Controllers/queryImdb.php",
-        data: { linkImdb: linkImdb },
-        success: function(noteImdb){
+        if(name2 != "" && year2 !=""){
 
-          if(name2 != "" && year2 !=""){
-
-           $.ajax({
-            type: "POST",
-            url: "Controllers/getFilmsController.php",
-            data: { name: name2, year: year2, note:noteImdb, link:linkImdb, addFilm:"true" },
-            success: function(data3){
-              console.log(data3);
-              loadFilms("name","asc");
-              $('#name, #year').val('');
-              
-              getAllInfo(linkImdb, nameReal, year2);
-            }
-          });
-         }
-       }
-     });
-     }
-   });
-
-
-
-   }); 
-
-    $("#btnAsc").click(function() { 
-     loadFilms("year","asc");
-
-   }); 
-    $("#btnDes").click(function() { 
-     loadFilms("year","desc");
-
-   }); 
-    
-
-    $( "#searchFilm" ).keyup(function() {
-     var searchFilm = $('#searchFilm').val();
-     searchFilm = searchFilm.toLowerCase();
-     $.ajax({
-      type: "POST",
-      url: "Controllers/getFilmsController.php",
-      data: { name: searchFilm, searchFilm:"true" },
-      success: function(data){
-
-        $("#result").html(data);
-
-      }
-    });
-
-
-   });
-
-
-  }); 
-  function getAllInfo(linkI,nameFilm, yearFilm){
-    var linkImage="";
-    description="";
-    director="";
-    duration="";
-    genre="";
-    stars="";
-    
-    $.ajax({
-      type: "POST",
-      url: "Controllers/getAllInfo.php",
-      data: { linkImdb: linkI, getImg:"true" },
-      success: function(data){
-        linkImage=data;
-        
-        $.ajax({
+         $.ajax({
           type: "POST",
-          url: "Controllers/getAllInfo.php",
-          data: { linkImdb: linkI, getDesc:"true" },
-          success: function(data){
-
-            description=data;
+          url: "Controllers/getFilmsController.php",
+          data: { name: name2, year: year2, note:noteImdb, link:linkImdb, addFilm:"true" },
+          success: function(data3){
+            console.log(data3);
+            loadFilms("name","asc");
+            $('#name, #year').val('');
             
-            $.ajax({
-              type: "POST",
-              url: "Controllers/getAllInfo.php",
-              data: { linkImdb: linkI, getDirect:"true" },
-              success: function(data){
+            getAllInfo(linkImdb, nameReal, year2);
+          }
+        });
+       }
+     }
+   });
+   }
+ });
 
-                director=data;
-                
-                
-                console.log("director: "+director+"  descripcion: "+description+"link img: "+linkImage);
-                $.ajax({
-                  type: "POST",
-                  url: "Controllers/getAllInfo.php",
-                  data: { linkImdb: linkI, getDuration:"true" },
-                  success: function(data){
 
-                    alert(data);
-                    duration=data;
 
+ }); 
+
+  $("#btnAsc").click(function() { 
+   loadFilms("year","asc");
+
+ }); 
+  $("#btnDes").click(function() { 
+   loadFilms("year","desc");
+
+ }); 
+  
+
+  $( "#searchFilm" ).keyup(function() {
+   var searchFilm = $('#searchFilm').val();
+   searchFilm = searchFilm.toLowerCase();
+   $.ajax({
+    type: "POST",
+    url: "Controllers/getFilmsController.php",
+    data: { name: searchFilm, searchFilm:"true" },
+    success: function(data){
+
+      $("#result").html(data);
+
+    }
+  });
+
+
+ });
+
+
+}); 
+ function getAllInfo(linkI,nameFilm, yearFilm){
+  var linkImage="";
+  description="";
+  director="";
+  duration="";
+  genre="";
+  stars="";
+  
+  $.ajax({
+    type: "POST",
+    url: "Controllers/getAllInfo.php",
+    data: { linkImdb: linkI, getImg:"true" },
+    success: function(data){
+      linkImage=data;
+      
+      $.ajax({
+        type: "POST",
+        url: "Controllers/getAllInfo.php",
+        data: { linkImdb: linkI, getDesc:"true" },
+        success: function(data){
+
+          description=data;
+          
+          $.ajax({
+            type: "POST",
+            url: "Controllers/getAllInfo.php",
+            data: { linkImdb: linkI, getDirect:"true" },
+            success: function(data){
+
+              director=data;
+              
+              
+              console.log("director: "+director+"  descripcion: "+description+"link img: "+linkImage);
+              $.ajax({
+                type: "POST",
+                url: "Controllers/getAllInfo.php",
+                data: { linkImdb: linkI, getDuration:"true" },
+                success: function(data){
+
+                  duration=data;
+
+                  $.ajax({
+                   type: "POST",
+                   url: "Controllers/getAllInfo.php",
+                   data: { linkImdb: linkI, getGenre:"true" },
+                   success: function(data){
+                    genre=data;
+                    
                     $.ajax({
+
                      type: "POST",
                      url: "Controllers/getAllInfo.php",
-                     data: { linkImdb: linkI, getGenre:"true" },
+                     data: { linkImdb: linkI, getStars:"true" },
                      success: function(data){
-                      genre=data;
-                      alert(genre);
+                      stars=data;
+
                       $.ajax({
-
-                       type: "POST",
-                       url: "Controllers/getAllInfo.php",
-                       data: { linkImdb: linkI, getStars:"true" },
-                       success: function(data){
-                        stars=data;
-                        alert(stars);
-                        $.ajax({
-                          type: "POST",
-                          url: "Controllers/getFilmsController.php",
-                          data: { name: nameFilm, year: yearFilm, linkImg:linkImage, infoDescription:description,
-                           infoDirector:director, infoDuration:duration, infoGenre:genre, infoStars:stars, updateFilm:"true" },
-                           success: function(data){
-                            console.log(data);
+                        type: "POST",
+                        url: "Controllers/getFilmsController.php",
+                        data: { name: nameFilm, year: yearFilm, linkImg:linkImage, infoDescription:description,
+                         infoDirector:director, infoDuration:duration, infoGenre:genre, infoStars:stars, updateFilm:"true" },
+                         success: function(data){
+                           
 
 
-                          }
-                        });
-                      }
-                    });
+                         }
+                       });
                     }
                   });
-
-
                   }
                 });
 
 
-              }
-            });
+                }
+              });
 
-          }
-        });
 
-      }
-    });
-    
-    
-  }
+            }
+          });
 
-  $(document).on('click', '.film', function () {
-   var idFilm= $(this).attr("id");
+        }
+      });
 
-   idFilm=idFilm.substr(4);
-   idFilmNum=parseInt(idFilm);
-   $('body').append('<div id="newDiv"></div>');
-   searchFilmById(idFilm);
- });
-  $(document).on('click', '#closeImg', function () {
-    $('div').remove('#newDiv');
+    }
   });
+  
+  
+}
 
-  function searchFilmById(idFilmNum){
+$(document).on('click', '.film', function () {
+ var idFilm= $(this).attr("id");
 
-    $.ajax({
-      type: "POST",
-      url: "Controllers/getFilmsController.php",
-      data: { id: idFilmNum, searchFilmById:"true" },
-      success: function(data){
+ idFilm=idFilm.substr(4);
+ idFilmNum=parseInt(idFilm);
+ $('body').append('<div id="newDiv"></div>');
+ searchFilmById(idFilm);
+});
 
-        $("#newDiv").html(data);
+$(document).on('click', '#closeImg', function () {
+  $('div').remove('#newDiv');
+});
 
-      }
-    });
-  }
+$(document).on('click', '#btnScore', function () {
+ var score=$('.inputScore').val();
+ var fScore=parseFloat(score);
+ var idFilm= $('.inputScore').attr("id");
+ idFilm=idFilm.substr(5);
+ idFilmNum=parseInt(idFilm);
+ toVote(idFilmNum,fScore);
+});
 
-  function loadFilms(column,order){
+function toVote(idFilm, score){
+  alert(idFilm);
+  $.ajax({
+    type: "POST",
+    url: "Controllers/getFilmsController.php",
+    data: { id: idFilm, scoreFilm:score, voteFilm:"true" },
+    success: function(data){
 
-    $.ajax({
-      type: "POST",
-      url: "Controllers/getFilmsController.php",
-      data: { orderBy: column, order: order, getFilms:"true" },
-      success: function(data){
+      
 
-        $("#result").html(data);
+    }
+  });
+}
 
-      }
-    });
-  };
+function searchFilmById(idFilmNum){
+
+  $.ajax({
+    type: "POST",
+    url: "Controllers/getFilmsController.php",
+    data: { id: idFilmNum, searchFilmById:"true" },
+    success: function(data){
+
+      $("#newDiv").html(data);
+
+    }
+  });
+}
+
+function loadFilms(column,order){
+
+  $.ajax({
+    type: "POST",
+    url: "Controllers/getFilmsController.php",
+    data: { orderBy: column, order: order, getFilms:"true" },
+    success: function(data){
+
+      $("#result").html(data);
+
+    }
+  });
+};
 
