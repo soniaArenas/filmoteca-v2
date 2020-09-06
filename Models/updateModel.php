@@ -1,8 +1,9 @@
 <?php
 include("../Config/dbConnection.php");
 
-$queryDb="UPDATE films SET img='$linkImg', description='$description', director='$director'
+$queryDb="UPDATE films SET img='$linkImg', description='$description', director='$director', duration='$duration', genre='$genre', stars='$stars'
 WHERE name='$name'";
+	
 	
 
 if(mysqli_query($connect, $queryDb)){
