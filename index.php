@@ -1,7 +1,6 @@
-<?php 
-	
 
-include("Controllers/filmController.php");
+     <?php
+ require_once('views/filmsView.php');
+  ?>
 
 
-?>

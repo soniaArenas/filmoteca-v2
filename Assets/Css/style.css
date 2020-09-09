@@ -1,3 +1,4 @@
+
 *{	
 	font-family: 'Merienda';
 }
@@ -106,7 +107,7 @@ border-radius: 20px;
  border: 5px solid black;
 }
 
-#closeImg{
+.closeImg{
 	width: 5%;
 	float:right;
 }
@@ -133,4 +134,17 @@ li{
 }
 #descriptionTable td{
 	margin:10%;
+	padding: 5%;
+}
+
+#thanksDiv{
+	background-color:#CC9945;
+	position: absolute;
+	top: 30%;
+	left: 20%;
+	text-align: center;
+	font-weight: bold;
+	z-index: 200;
+	border-radius: 20px;
+ border: 5px solid black;
 }
